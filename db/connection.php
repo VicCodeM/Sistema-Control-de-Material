@@ -30,45 +30,37 @@ class Database {
             if ($stmt === false) {
                 throw new Exception('Failed to prepare statement: ' . $this->db->lastErrorMsg());
             }
-
+            
             foreach ($params as $param => $value) {
-                $type = $this->getParamType($value);
-                if (is_int($value)) {
-                    $stmt->bindValue($param, $value, SQLITE3_INTEGER);
+                $type = is_int($value) ? SQLITE3_INTEGER : SQLITE3_TEXT;
+                if (is_null($value)) {
+                    $type = SQLITE3_NULL;
                 } elseif (is_float($value)) {
-                    $stmt->bindValue($param, $value, SQLITE3_FLOAT);
-                } else {
-                    $stmt->bindValue($param, $value, SQLITE3_TEXT);
+                    $type = SQLITE3_FLOAT;
+                }
+                
+                if ($stmt->bindValue($param, $value, $type) === false) {
+                    throw new Exception('Failed to bind parameter ' . $param);
                 }
             }
-
-            $result = $stmt->execute();
             
+            $result = $stmt->execute();
             if ($result === false) {
                 throw new Exception('Failed to execute statement: ' . $this->db->lastErrorMsg());
             }
-
+            
             return $result;
         } catch (Exception $e) {
-            error_log('Database query error: ' . $e->getMessage());
-            throw $e;
+            throw new Exception('Query failed: ' . $e->getMessage());
         }
-    }
-
-    private function getParamType($value) {
-        if (is_int($value)) return SQLITE3_INTEGER;
-        if (is_float($value)) return SQLITE3_FLOAT;
-        return SQLITE3_TEXT;
     }
 
     public function lastInsertRowID() {
         return $this->db->lastInsertRowID();
     }
 
-    public function close() {
-        if ($this->db) {
-            $this->db->close();
-        }
+    public function escapeString($string) {
+        return $this->db->escapeString($string);
     }
 }
 ?>

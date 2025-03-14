@@ -79,23 +79,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Niño - Guardería</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-</head>
-<body>
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="../dashboard.php">Guardería</a>
-        </div>
-    </nav>
-
-    <div class="container mt-4">
+<?php
+$page_title = 'Editar Niño';
+$current_page = 'children';
+$base_path = '../';
+include '../templates/header.php';
+?>
+        <main class="main-content">
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="card">
@@ -138,36 +128,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <input type="date" class="form-control" id="enrollment_date" name="enrollment_date" 
                                            value="<?php echo $child['enrollment_date']; ?>" required>
                                 </div>
-                            </div>
+                                </div>
 
-                            <div class="mb-3">
-                                <label for="status" class="form-label">Estado</label>
-                                <select class="form-select" id="status" name="status">
-                                    <option value="active" <?php echo $child['status'] == 'active' ? 'selected' : ''; ?>>Activo</option>
-                                    <option value="inactive" <?php echo $child['status'] == 'inactive' ? 'selected' : ''; ?>>Inactivo</option>
-                                </select>
-                            </div>
+                                <div class="mb-3">
+                                    <label for="status" class="form-label">Estado</label>
+                                    <select class="form-select" id="status" name="status">
+                                        <option value="active" <?php echo $child['status'] == 'active' ? 'selected' : ''; ?>>Activo</option>
+                                        <option value="inactive" <?php echo $child['status'] == 'inactive' ? 'selected' : ''; ?>>Inactivo</option>
+                                    </select>
+                                </div>
 
-                            <div class="mb-3">
-                                <label for="allergies" class="form-label">Alergias</label>
-                                <textarea class="form-control" id="allergies" name="allergies" rows="2"><?php echo htmlspecialchars($child['allergies']); ?></textarea>
-                            </div>
+                                <div class="mb-3">
+                                    <label for="allergies" class="form-label">Alergias</label>
+                                    <textarea class="form-control" id="allergies" name="allergies" rows="2"><?php echo htmlspecialchars($child['allergies']); ?></textarea>
+                                </div>
 
-                            <div class="mb-3">
-                                <label for="special_notes" class="form-label">Notas Especiales</label>
-                                <textarea class="form-control" id="special_notes" name="special_notes" rows="3"><?php echo htmlspecialchars($child['special_notes']); ?></textarea>
-                            </div>
+                                <div class="mb-3">
+                                    <label for="special_notes" class="form-label">Notas Especiales</label>
+                                    <textarea class="form-control" id="special_notes" name="special_notes" rows="3"><?php echo htmlspecialchars($child['special_notes']); ?></textarea>
+                                </div>
 
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                            </div>
-                        </form>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+        </main>
+<?php include '../templates/footer.php'; ?>

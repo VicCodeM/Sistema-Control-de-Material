@@ -81,23 +81,13 @@ while ($type = $types_result->fetchArray(SQLITE3_ASSOC)) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Salud - Guardería</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-</head>
-<body>
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="../dashboard.php">Guardería</a>
-        </div>
-    </nav>
-
-    <div class="container mt-4">
+<?php
+$page_title = 'Gestión de Salud';
+$current_page = 'health';
+$base_path = '../';
+include '../templates/header.php';
+?>
+        <main class="main-content">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2>Gestión de Salud</h2>
             <a href="register.php" class="btn btn-primary">
@@ -229,8 +219,5 @@ while ($type = $types_result->fetchArray(SQLITE3_ASSOC)) {
                 <?php endif; ?>
             </div>
         </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    </main>
+<?php include '../templates/footer.php'; ?>

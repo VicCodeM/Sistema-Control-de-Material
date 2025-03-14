@@ -56,6 +56,10 @@ $stats_result = $db->query(
 $stats = $stats_result->fetchArray(SQLITE3_ASSOC);
 ?>
 
+<?php
+$current_page = 'attendance';
+$base_path = '../';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -70,13 +74,15 @@ $stats = $stats_result->fetchArray(SQLITE3_ASSOC);
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="../dashboard.php">Guardería</a>
-        </div>
-    </nav>
+    <?php
+$page_title = 'Gestión de Asistencia';
+$current_page = 'attendance';
+$base_path = '../';
+include '../templates/header.php';
+?>
+        <main class="main-content">
 
-    <div class="container mt-4">
+                <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2>Gestión de Asistencia</h2>
             <div>

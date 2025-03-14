@@ -183,6 +183,10 @@ $stats_result = $db->query($stats_query, $params);
 $stats = $stats_result->fetchArray(SQLITE3_ASSOC);
 ?>
 
+<?php
+$current_page = 'accounting';
+$base_path = '../';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -191,22 +195,8 @@ $stats = $stats_result->fetchArray(SQLITE3_ASSOC);
     <title>Gestión de Gastos - Guardería</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .card {
-            border-radius: 10px;
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-            margin-bottom: 20px;
-            border: none;
-        }
-        .card-header {
-            background-color: #fff;
-            border-bottom: 1px solid rgba(0,0,0,.125);
-            padding: 1rem 1.25rem;
-            font-weight: 600;
-        }
         .stat-card {
             transition: transform 0.3s;
         }
@@ -220,32 +210,31 @@ $stats = $stats_result->fetchArray(SQLITE3_ASSOC);
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="../dashboard.php">Guardería</a>
-            <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="bi bi-list fs-1"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php">Contabilidad</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="expenses.php">Gastos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="income.php">Ingresos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="reports.php">Reportes</a>
-                    </li>
-                </ul>
+    <?php
+$page_title = 'Gestión de Gastos';
+$current_page = 'accounting';
+$base_path = '../';
+include '../templates/header.php';
+?>
+        <main class="main-content">
+            <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="bi bi-cash-stack"></i> Gestión de Gastos</h2>
+            <div>
+                <a href="index.php" class="btn btn-outline-primary me-2">
+                    <i class="bi bi-calculator"></i> Contabilidad
+                </a>
+                <a href="income.php" class="btn btn-outline-success me-2">
+                    <i class="bi bi-cash"></i> Ingresos
+                </a>
+                <a href="reports.php" class="btn btn-outline-info me-2">
+                    <i class="bi bi-file-earmark-bar-graph"></i> Reportes
+                </a>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addExpenseModal">
+                    <i class="bi bi-plus-circle"></i> Registrar Nuevo Gasto
+                </button>
             </div>
         </div>
-    </nav>
-
-    <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2><i class="bi bi-cash-stack"></i> Gestión de Gastos</h2>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addExpenseModal">
